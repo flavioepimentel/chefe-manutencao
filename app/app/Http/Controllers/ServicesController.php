@@ -14,7 +14,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        //
+        return Services::all();
     }
 
     /**
@@ -22,7 +22,7 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        //
+        return Services::all();
     }
 
     /**

@@ -38,8 +38,8 @@ class Services extends Model
         'serviceName' => 'string',
         'shortDescription' => 'string',
         'specialty' => 'string',
-        'coast' => 'float',
-        'price' => 'float',
+        'coast' => 'double',
+        'price' => 'double',
         'items' => 'string',
         'averegeTime' => 'integer',
     ];
