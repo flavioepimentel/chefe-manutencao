@@ -15,23 +15,9 @@ class ClientsController extends BaseController
      */
     public function index()
     {
-        //
-        $client =  Clients::all();
         return response()->json([
-            $client
+            Clients::all()
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * 
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function create(StoreClientsRequest $request)
-    {
-        //
-        return Clients::create($request->all());
     }
 
     /**
@@ -42,28 +28,17 @@ class ClientsController extends BaseController
      */
     public function store(StoreClientsRequest $request)
     {
-        $client =  Clients::create($request->all());
-        return response()->json([
-            $client
-        ]);
+        return response()->json([Clients::create($request->all())]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Clients $clients)
     {
         return response()->json([
-            Clients::findOrFail($id)
+            Clients::findOrFail($clients->id)
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Clients $clients)
-    {
-        //
     }
 
     /**
@@ -73,19 +48,16 @@ class ClientsController extends BaseController
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClientsRequest $request, $id)
+    public function update(UpdateClientsRequest $request, Clients $clients)
     {
-        $clients = Clients::findOrFail($id);
-        $clients->update($request->all());
-        return $clients;
+        return response()->json(Clients::findOrFail($clients->id)->update($request->all()));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Clients $clients)
     {
-        $clients = Clients::findOrFail($id);
-        $clients->delete();
+        return response()->json(Clients::findOrFail($clients->id)->delete());
     }
 }

@@ -14,15 +14,7 @@ class VehiclesController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json([Vehicles::all()]);
     }
 
     /**
@@ -30,7 +22,7 @@ class VehiclesController extends Controller
      */
     public function store(StoreVehiclesRequest $request)
     {
-        //
+        return response()->json([Vehicles::create($request->all())]);
     }
 
     /**
@@ -38,15 +30,7 @@ class VehiclesController extends Controller
      */
     public function show(Vehicles $vehicles)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Vehicles $vehicles)
-    {
-        //
+        return response()->json(Vehicles::findOrFail($vehicles->id));
     }
 
     /**
@@ -54,7 +38,7 @@ class VehiclesController extends Controller
      */
     public function update(UpdateVehiclesRequest $request, Vehicles $vehicles)
     {
-        //
+        return response()->json(Vehicles::findOrFail($vehicles->id)->update($request->all(), $vehicles));
     }
 
     /**
@@ -62,6 +46,6 @@ class VehiclesController extends Controller
      */
     public function destroy(Vehicles $vehicles)
     {
-        //
+        return response()->json(Vehicles::findOrFail($$vehicles->id)->delete());
     }
 }

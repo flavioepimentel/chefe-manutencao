@@ -14,16 +14,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        $agenda = Agenda::all();
-        return response()->json([$agenda]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(StoreAgendaRequest $request)
-    {
-        return Agenda::create($request->all());
+        return response()->json([Agenda::all()]);
     }
 
     /**
@@ -31,8 +22,7 @@ class AgendaController extends Controller
      */
     public function store(StoreAgendaRequest $request)
     {
-        $agenda = Agenda::create($request->all());
-        return request()->json([$agenda]);
+        return request()->json([Agenda::create($request->all())]);
     }
 
     /**
@@ -41,34 +31,23 @@ class AgendaController extends Controller
     public function show(Agenda $agenda)
     {
         return response()->json(
-            Agenda::findOrFail($agenda->agenda_id)
+            Agenda::findOrFail($agenda->id)
         );
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Agenda $agenda)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAgendaRequest $request, $id)
+    public function update(UpdateAgendaRequest $request, Agenda $agenda)
     {
-        $agenda = Agenda::findOrFail($id);
-        $agenda->update($request->all());
-        return $agenda;
+        return response()->json(Agenda::findOrFail($agenda->id)->update($request->all()));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Agenda $agenda)
     {
-        $agenda = Agenda::findOrFail($id);
-        $agenda->delete($id);
+        return response()->json(Agenda::findOrFail($agenda->id)->delete());
     }
 }
