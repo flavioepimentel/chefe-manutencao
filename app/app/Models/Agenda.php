@@ -10,26 +10,16 @@ class Agenda extends Model
     use HasFactory;
 
     protected $fillable = [
-        'vehicleOwner',
-        'vehicleName',
-        'vehicleModel',
-        'vehicleYear',
-        'vehiclePlate',
-        'serviceName',
-        'price',
-        'items',
+        'ownerId',
+        'vehicleId',
+        'serviceId',
         'user_id',
     ];
 
     protected $casts = [
-        'vehicleOwner' => 'string',
-        'vehicleName' => 'string',
-        'vehicleModel' => 'string',
-        'vehicleYear' => 'string',
-        'vehiclePlate' => 'string',
-        'serviceName' => 'string',
-        'price' => 'doble',
-        'items' => 'string',
-        'user_id' => 'string',
+        'ownerId' => 'integer',
+        'vehicleId' => 'integer',
+        'serviceId' => 'integer',
+        'user_id' => 'integer',
     ];
 }
