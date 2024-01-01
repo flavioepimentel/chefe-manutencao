@@ -3,46 +3,59 @@
 namespace App\Http\Controllers;
 
 use App\Models\Clients;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClientsRequest;
 use App\Http\Requests\UpdateClientsRequest;
 use Illuminate\View\View;
+use Illuminate\Routing\Controller as BaseController;
 
-class ClientsController extends Controller
+class ClientsController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(string $id): View
+    public function index()
     {
         //
-        return view("client.profile", [
-            'client' => Clients::findOrFail($id)
+        $client =  Clients::all();
+        return response()->json([
+            $client
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(StoreClientsRequest $request)
     {
         //
+        return Clients::create($request->all());
     }
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreClientsRequest $request)
     {
-        //
+        $client =  Clients::create($request->all());
+        return response()->json([
+            $client
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Clients $clients)
+    public function show($id)
     {
-        //
+        return response()->json([
+            Clients::findOrFail($id)
+        ]);
     }
 
     /**
@@ -55,17 +68,24 @@ class ClientsController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClientsRequest $request, Clients $clients)
+    public function update(UpdateClientsRequest $request, $id)
     {
-        //
+        $clients = Clients::findOrFail($id);
+        $clients->update($request->all());
+        return $clients;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Clients $clients)
+    public function destroy($id)
     {
-        //
+        $clients = Clients::findOrFail($id);
+        $clients->delete();
     }
 }
