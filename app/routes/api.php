@@ -1,12 +1,11 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\VehiclesController;
-use App\Http\Resources\ClientsResource;
-use App\Models\Clients;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +35,12 @@ Route::get('/services/{id}', [ServicesController::class, 'show']);
 Route::put('/services/{id}', [ServicesController::class, 'update']);
 Route::post('/services', [ServicesController::class, 'store']);
 Route::delete('/services/{id}', [ServicesController::class, 'destroy']);
+
+Route::get('/agenda', [AgendaController::class, 'index']);
+Route::get('/agenda/{id}', [AgendaController::class, 'show']);
+Route::put('/agenda/{id}', [AgendaController::class, 'update']);
+Route::post('/agenda', [AgendaController::class, 'store']);
+Route::delete('/agenda/{id}', [AgendaController::class, 'destroy']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
