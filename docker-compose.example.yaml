@@ -1,0 +1,37 @@
+
+version: '3.8'
+
+services:
+  chefe_pgs_db:
+    container_name: chefe_pgs_db
+    image: postgres
+    working_dir: /app
+    environment:
+      POSTGRES_USER: # root
+      POSTGRES_PASSWORD: # PASSWORD FROM .ENV FILE
+      POSTGRES_DB: # test_db
+    restart: always
+    ports:
+      - 3333:5432
+    volumes:
+      - ./postgres:/app
+    networks:
+      - chefe_network
+  
+  chefe_pg_admin:
+    container_name: chefe_pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL: # admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD: # SET YOUR PASS FROM PG_ADMIN HERE
+    restart: always
+    ports:
+      - 8080:80
+    depends_on:
+      - chefe_pgs_db
+    networks:
+      - chefe_network
+
+networks:
+  chefe_network:
+    driver: bridge
