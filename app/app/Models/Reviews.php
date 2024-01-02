@@ -15,7 +15,7 @@ class Reviews extends Model
     ];
 
     protected $casts = [
-        'ownerId' => 'integer',
+        'clientId' => 'integer',
         'vehicleId' => 'integer',
     ];
 }
