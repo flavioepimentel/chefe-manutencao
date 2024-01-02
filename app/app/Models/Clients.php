@@ -16,9 +16,8 @@ class Clients extends Model
      */
     protected $fillable = [
         'name',
-        'email',
-        'phoneNumber',
-        'licenseRegistration',
+        'gender',
+        'age',
     ];
 
     /**
@@ -26,9 +25,7 @@ class Clients extends Model
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'licenseRegistration',
-    ];
+    protected $hidden = [];
 
     /**
      * The attributes that should be cast.
@@ -37,7 +34,7 @@ class Clients extends Model
      */
     protected $casts = [
         'name' => 'string',
-        'email' => 'string',
-        'phoneNumber' => 'integer',
+        'gender' => 'string',
+        'age' => 'integer',
     ];
 }

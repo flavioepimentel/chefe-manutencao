@@ -14,11 +14,8 @@ class Vehicles extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'vehicleName',
-        'vehicleOwner',
-        'vehicleModel',
-        'vehicleYear',
-        'vehiclePlate',
+        'brand',
+        'clientId',
     ];
 
     /**
@@ -26,10 +23,7 @@ class Vehicles extends Model
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'licenseRegistration',
-        'vehiclePlate',
-    ];
+    protected $hidden = [];
 
     /**
      * The attributes that should be cast.
@@ -37,9 +31,8 @@ class Vehicles extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'vehicleName' => 'string',
-        'vehicleModel' => 'string',
-        'vehicleYear' => 'integer'
+        'brand' => 'string',
+        'clientId' => 'integer'
 
     ];
 }

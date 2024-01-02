@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicles;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVehiclesRequest;
 use App\Http\Requests\UpdateVehiclesRequest;
+use Illuminate\Routing\Controller as BaseController;
 
-class VehiclesController extends Controller
+class VehiclesController extends BaseController
 {
     /**
      * Display a listing of the resource.

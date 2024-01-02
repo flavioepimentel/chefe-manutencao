@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Clients;
 use App\Http\Requests\StoreClientsRequest;
 use App\Http\Requests\UpdateClientsRequest;
-use Illuminate\View\View;
 use Illuminate\Routing\Controller as BaseController;
 
 class ClientsController extends BaseController
@@ -28,7 +27,7 @@ class ClientsController extends BaseController
      */
     public function store(StoreClientsRequest $request)
     {
-        return response()->json([Clients::create($request->all())]);
+        return response()->json([Clients::create(["name" => $request->input("name"), "gender" => $request->input("gender"), "age" => $request->input("age")])]);
     }
 
     /**
