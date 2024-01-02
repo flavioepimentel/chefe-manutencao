@@ -8,43 +8,18 @@ use Illuminate\Http\Request;
 
 class ClientsReportController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+
 
     /**
-     * Store a newly created resource in storage.
+     * Report Clients With Average age by gender 
      */
-    public function store(Request $request)
+    public function averageAgeByGender(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json(
+            DB::table('clients')
+                ->select(DB::raw('round(avg(age), 0) as ageAverage'), 'clients.gender')
+                ->groupBy('clients.gender')
+                ->get()
+        );
     }
 }
