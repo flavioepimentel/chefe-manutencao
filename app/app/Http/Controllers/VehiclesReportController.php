@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller as BaseController;
 
 
-class ReportController extends BaseController
+class VehiclesReportController extends BaseController
 {
     /**
      * Store a newly created resource in storage.
      */
-    public function index()
+    public function vehicleByPerson()
     {
         $query = DB::table('vehicles')
             ->join('clients', 'clients.id', '=', 'vehicles.clientId')
@@ -24,10 +24,11 @@ class ReportController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function vehicleByGender()
     {
-        $query = DB::table('clients')
-            ->select(DB::raw('count(*) as vehicles, gender'))
+        $query = DB::table('vehicles')
+            ->join('clients', 'clients.id', '=', 'vehicles.clientId')
+            ->select(DB::raw('count(*) as vehicles_count, clients.gender'))
             ->groupBy('clients.gender')
             ->get();
         return response()->json([$query]);
@@ -36,10 +37,10 @@ class ReportController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function vehicleByBrand()
     {
         $query = DB::table('vehicles')
-            ->select(DB::raw('count(*) as vehicles, brand'))
+            ->select(DB::raw('count(*) as vehicles_count, brand'))
             ->groupBy('vehicles.brand')
             ->get();
         return response()->json([$query]);
@@ -48,11 +49,13 @@ class ReportController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function vehicleByBrandGender()
     {
         $query = DB::table('vehicles')
-            ->select(DB::raw('count(*) as vehicles, brand'), 'clients.gender')
+            ->join('clients', 'clients.id', '=', 'vehicles.clientId')
+            ->select('clients.gender', DB::raw('count(*) as vehicles_count, brand'))
             ->groupBy('vehicles.brand', 'clients.gender')
+            ->orderBy('vehicles_count', 'desc')
             ->get();
         return response()->json([$query]);
     }
